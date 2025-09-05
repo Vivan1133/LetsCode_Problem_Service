@@ -3,6 +3,7 @@ const { ProblemController } = require("../../controllers/index");
 
 const router = express.Router();
 
+// /api/v1/problems
 
 router.get("/ping", ProblemController.pingProblemController);
 router.get("/:id", ProblemController.getProblem);

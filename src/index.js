@@ -2,6 +2,7 @@ const express = require("express");
 const { PORT } = require("../src/config/server-config");
 const bodyparser = require("body-parser");
 const apiRoutes = require("./routes/index");
+const errorHandler = require("./utils/errorHandler");
 
 const app = express();
 
@@ -16,6 +17,10 @@ app.use(bodyparser.urlencoded({extended: true}));
 app.use(bodyparser.text());
 
 app.use("/api", apiRoutes);
+
+
+// last middleware, if any error occurs
+app.use(errorHandler);
 
 app.listen(PORT, () => {
     console.log(`server started at port: ${PORT}`);
