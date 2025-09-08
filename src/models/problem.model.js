@@ -12,7 +12,6 @@ const problemSchema = new mongoose.Schema({
     difficulty: {
         type: String,
         enum: ["Easy", "Medium", "Hard"],
-        required: [true, "difficulty can not be empty"],
         default: "Easy"
     },
     testCases: [
@@ -30,8 +29,9 @@ const problemSchema = new mongoose.Schema({
     editorial: {
         type: String
     }
-
 });
 
 const Problem = mongoose.model("Problem", problemSchema);
+
+
 module.exports = Problem;

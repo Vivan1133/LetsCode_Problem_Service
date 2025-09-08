@@ -1,14 +1,24 @@
 const NotImplementedError = require("../errors/NotImplementedError");
+const { ProblemService } = require("../services/index");
+const { ProblemRepository } = require("../repositories/index");
+const { StatusCodes } = require("http-status-codes");
 
-
+const problemService = new ProblemService(new ProblemRepository());
 
 const pingProblemController = (req, res) => {
     return res.json({message: "problem controller is up"});
 }
 
-const addProblem = (req, res, next) => {
+const addProblem = async (req, res, next) => {
     try {
-        throw new NotImplementedError("addProblem");
+        console.log("request body: ", req.body);
+        const response = await problemService.createProblem(req.body);
+        return res.status(StatusCodes.CREATED).json({
+            success: true,
+            message: "successfully created a new problem",
+            error: {},
+            data: response
+        })
     } catch (error) {
         next(error);
     }
