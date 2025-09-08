@@ -52,9 +52,15 @@ const getProblems = async (req, res, next) => {
     }
 }
 
-const updateProblem = (req, res, next) => {
+const updateProblem = async (req, res, next) => {
     try {
-        
+        const response = await problemService.updateProblem(req.params.id, req.body);
+        return res.status(StatusCodes.OK).json({
+            success: true,
+            message: "successfully updated the problem",
+            error: {},
+            data: response
+        });
     } catch (error) {
         next(error);
     }

@@ -52,6 +52,16 @@ class ProblemService {
         }
     }
 
+    async updateProblem(id, data) {
+        try {
+            const response = await this.problemRepository.updateProblem(id, data);
+            return response;
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
+    }
+
 
 }
 
