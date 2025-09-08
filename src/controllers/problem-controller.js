@@ -32,9 +32,15 @@ const getProblem = (req, res, next) => {
     }
 }
 
-const getProblems = (req, res, next) => {
+const getProblems = async (req, res, next) => {
     try {
-        
+        const response = await problemService.getAllProblems();
+        return res.status(StatusCodes.OK).json({
+            success: true,
+            message: "successfully fetched all the problems",
+            error: {},
+            data: response
+        })
     } catch (error) {
         next(error);
     }
