@@ -24,9 +24,15 @@ const addProblem = async (req, res, next) => {
     }
 }
 
-const getProblem = (req, res, next) => {
+const getProblem = async (req, res, next) => {
     try {
-        
+        const response = await problemService.getProblem(req.params.id);
+        return res.status(StatusCodes.OK).json({
+            success: true,
+            error: {},
+            message: "successfully fetched a problem",
+            data: response
+        })
     } catch (error) {
         next(error);
     }

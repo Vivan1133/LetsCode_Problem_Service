@@ -32,7 +32,17 @@ class ProblemService {
         }
     }
 
-    
+    async getProblem(id) {
+        try {
+            const response = await this.problemRepository.getProblem(id);
+            return response;
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
+    }
+
+
 }
 
 
