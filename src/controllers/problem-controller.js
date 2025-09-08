@@ -60,9 +60,15 @@ const updateProblem = (req, res, next) => {
     }
 }
 
-const deleteProblem = (req, res, next) => {
+const deleteProblem = async (req, res, next) => {
     try {
-        
+        const response = await problemService.deleteProblem(req.params.id);
+        return res.status(StatusCodes.OK).json({
+            success: true,
+            message: "successfully deleted the problem",
+            error: {},
+            data: response
+        })
     } catch (error) {
         next(error);
     }

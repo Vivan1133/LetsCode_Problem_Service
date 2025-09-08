@@ -42,6 +42,16 @@ class ProblemService {
         }
     }
 
+    async deleteProblem(id) {
+        try {
+            const response = await this.problemRepository.deleteProblem(id);
+            return response;
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
+    }
+
 
 }
 

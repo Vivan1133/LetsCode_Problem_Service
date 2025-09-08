@@ -36,6 +36,20 @@ class ProblemRepository {
             }
             return response;
         } catch (error) {
+            console.log(error);
+            if(error.name == "CastError") {
+                throw new NotFoundError("Problem", id);
+            }
+            throw error;
+        }
+    }
+
+    async deleteProblem(id) {
+        try {
+            const response = await Problem.findByIdAndDelete(id);
+            return response;
+        } catch (error) {
+            console.log(error);
             if(error.name == "CastError") {
                 throw new NotFoundError("Problem", id);
             }
