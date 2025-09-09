@@ -1,3 +1,4 @@
+const logger = require("../config/logger.config");
 const NotFoundError = require("../errors/NotFoundError");
 const { Problem } = require("../models/index");
 
@@ -47,9 +48,12 @@ class ProblemRepository {
     async deleteProblem(id) {
         try {
             const response = await Problem.findByIdAndDelete(id);
+            if(!response) {
+                throw new NotFoundError("Problem", id);
+            }
+            logger.info("deleted the problem");
             return response;
         } catch (error) {
-            console.log(error);
             if(error.name == "CastError") {
                 throw new NotFoundError("Problem", id);
             }

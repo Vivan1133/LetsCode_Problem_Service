@@ -7,11 +7,8 @@ class ProblemService {
 
     async createProblem(problemData) {
         try {
-            console.log("before sanitization: ", problemData.description);
             // sanitize the markdown for description
             problemData.description = sanitizeMarkdownContent(problemData.description);
-
-            console.log("after sanitization: ", problemData.description);
             
 
             const problem = await this.problemRepository.createProblem(problemData);
